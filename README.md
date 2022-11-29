@@ -11,7 +11,6 @@ and have been working with it to create a data visualization to answer all of ou
 is to create a graph that will let it's viewers answer their own questions about the dataset as well.
 ## Authors
 
-- [Jenna Adams](https://www.github.com/jen000)
 - [Asim Bharde](https://www.github.com/asim-bharde)
 - [Owen Petersen](https://www.github.com/owenpetersen)
 
