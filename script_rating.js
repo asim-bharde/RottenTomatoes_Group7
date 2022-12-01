@@ -26,7 +26,7 @@ d3.csv("rotten_tomatoes_movies.csv").then(
   
 
         var dimensions = {
-            width: 2250,
+            width: 2000,
             height: 700,
             margin:{
                 top: 10,
