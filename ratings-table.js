@@ -147,10 +147,30 @@ d3.csv("rotten_tomatoes_movies.csv").then(
             if(localStorage.getItem("decade") != null){
                 localStorage.removeItem("decade")
             }
-            localStorage.setItem("decade", JSON.stringify(decade))
-            localStorage.setItem("rating", JSON.stringify(rating))
-
-            scatterplot()
+            if(d3.select(this).attr("class") == "unselected"){
+                d3.selectAll("rect")
+                .attr("class", "unselected")
+                .attr("stroke", "none")
+                .attr("stroke-width", 1)
+                d3.select(this)
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("class", "selected")
+                localStorage.removeItem("genre")
+                localStorage.setItem("decade", JSON.stringify(decade))
+                localStorage.setItem("rating", JSON.stringify(rating))
+                scatterplot()
+            }
+            else{
+                d3.select(this)
+                .attr("stroke", "none")
+                .attr("stroke-width", 1)
+                .attr("class", "unselected")
+                localStorage.removeItem("decade")
+                localStorage.removeItem("rating")
+                localStorage.removeItem("genre")
+                scatterplot()
+            }
         }
         var mouseleave = function (d) {
             tooltip.style("opacity", 0)
@@ -164,10 +184,11 @@ d3.csv("rotten_tomatoes_movies.csv").then(
             .attr("y", function (d) { return y(d.rating) })
             .attr("width", x.bandwidth())
             .attr("height", y.bandwidth())
+            .attr("class", "unselected")
             .style("fill", function (d) { return myColor(d.score) })
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave)
-            .on("click", function(event, d){click(event, d)})
+            .on("click", click)
     }
 )

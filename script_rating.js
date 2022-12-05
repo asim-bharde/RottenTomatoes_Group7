@@ -139,7 +139,7 @@ export function scatterplot() {
                 d.x = x(d);
                 d.y = y(d);
                 d.color = color(get_genre(d));
-                d.r = 2;
+                d.r = 2.5;
             })
 
             var layout = d3.forceSimulation(filtered_data)

@@ -180,14 +180,36 @@ d3.csv("rotten_tomatoes_movies.csv").then(
                 localStorage.removeItem("genre")
             }
 
-            d3.select(this)
+
+            
+            if(d3.select(this).attr("class") == "unselected"){
+                d3.selectAll("rect")
+                .attr("class", "unselected")
+                .attr("stroke", "none")
+                .attr("stroke-width", 1)
+                d3.select(this)
                 .attr("stroke", "black")
-                .attr("stroke-width", "2px")
+                .attr("stroke-width", 1)
+                .attr("class", "selected")
+                localStorage.removeItem("rating")
+                localStorage.setItem("decade", JSON.stringify(decade))
+                localStorage.setItem("genre", JSON.stringify(genre))
+                scatterplot(d.genre, d.decade)
+            }
+            else{
+                d3.select(this)
+                .attr("stroke", "none")
+                .attr("stroke-width", 1)
+                .attr("class", "unselected")
+                localStorage.removeItem("decade")
+                localStorage.removeItem("genre")
+                localStorage.removeItem("rating")
+                scatterplot(d.genre, d.decade)
+            }
+            
 
 
-            localStorage.setItem("decade", JSON.stringify(decade))
-            localStorage.setItem("genre", JSON.stringify(genre))
-            scatterplot(d.genre, d.decade)
+            
         }
         var mouseleave = function (d) {
             tooltip.style("opacity", 0)
@@ -202,9 +224,10 @@ d3.csv("rotten_tomatoes_movies.csv").then(
             .attr("width", x.bandwidth())
             .attr("height", y.bandwidth())
             .style("fill", function (d) { return myColor(d.score) })
+            .attr("class", "unselected")
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave)
-            .on("click", function(event, d){click(event, d)}) 
+            .on("click", click) 
     }
 )

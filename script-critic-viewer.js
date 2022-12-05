@@ -120,6 +120,19 @@ export function dotToBars() {
                 .attr("height", function (d) { return dimensions.height - y(d.value); })
                 .attr("fill", function (d) { return color(d.key); });
 
+            svg.append("text")
+                .attr("x", dimensions.width - 80)
+                .attr("y", dimensions.margin.top)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .text("Red: Critic Score")
+            svg.append("text")
+                .attr("x", dimensions.width - 80)
+                .attr("y", dimensions.margin.top + 15)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .text("Blue: Audience Score")
+
 
         }
     )
