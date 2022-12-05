@@ -10,17 +10,39 @@ export function dotToBars() {
 
             var simple_data = []
 
-            for (var i = 0; i < random_dataset.length; i++) {
-                var b = {
-                    'movie_title': random_dataset[i].movie_title,
-                    'tomatometer_rating': parseInt(random_dataset[i].tomatometer_rating),
-                    'audience_rating': parseInt(random_dataset[i].audience_rating)
+            var b
+
+
+            if(localStorage.getItem("title") != null){
+                simple_data.pop();
+                console.log(localStorage.getItem("title"))
+                console.log(localStorage.getItem("audience"))
+                console.log(localStorage.getItem("critic"))
+                // var this_movie = dataset.filter(function(d){
+                //     d.movie_title == localStorage.getItem("title")[0]
+                // })
+                // console.log(this_movie)
+                var title = JSON.parse(localStorage.getItem("title"))
+                var audience = JSON.parse(localStorage.getItem("audience"))
+                var critic = JSON.parse(localStorage.getItem("critic"))
+                b = {
+                    'movie_title': title['title'],
+                    'tomatometer_rating': critic['critic'],
+                    'audience_rating': audience['audience']
                 }
+                console.log(b)
+                simple_data.push(b)
+            }else{
+                b = {
+                    'movie_title': random_dataset[0].movie_title,
+                    'tomatometer_rating': parseInt(random_dataset[0].tomatometer_rating),
+                    'audience_rating': parseInt(random_dataset[0].audience_rating)
+                }
+                console.log(b)
                 simple_data.push(b)
             }
-
             //console.log(random_dataset)
-            //console.log(simple_data)
+            console.log(simple_data)
 
             var dimensions = {
                 width: 400,
@@ -32,6 +54,8 @@ export function dotToBars() {
                     left: 50
                 }
             }
+
+            d3.selectAll("#bars > *").remove();
 
             var svg = d3.select("#bars")
                 .append("svg")

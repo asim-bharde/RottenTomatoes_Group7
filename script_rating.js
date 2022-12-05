@@ -60,7 +60,7 @@ export function scatterplot() {
 
             var dimensions = {
                 width: 1000,
-                height: 700,
+                height: 500,
                 margin: {
                     top: 10,
                     bottom: 50,
@@ -171,7 +171,26 @@ export function scatterplot() {
                           .attr("stroke-width", "0px")
                     })
                     /////////////////////////////////
-                    .on('click', function(d, i){
+                    .on('click', function(event, d){
+                        if(localStorage.getItem("title") != null){
+                            localStorage.removeItem("title")
+                            localStorage.removeItem("audience")
+                            localStorage.removeItem("critic")
+                        }
+
+                        var title = {
+                            "title": d.movie_title
+                        }
+                        var critic = {
+                            "critic": parseInt(d.tomatometer_rating)
+                        }
+                        var audience ={
+                            "audience": parseInt(d.audience_rating)
+                        }
+
+                        localStorage.setItem("title", JSON.stringify(title))
+                        localStorage.setItem("critic", JSON.stringify(critic))
+                        localStorage.setItem("audience", JSON.stringify(audience))
                         dotToBars()
                     })
                 n.transition().duration(500)
@@ -180,13 +199,6 @@ export function scatterplot() {
             }
 
             var nodes = createNodes();
-
-            svg.append("text")
-                .attr("x", dimensions.width / 2)
-                .attr("y", dimensions.margin.top + 10)
-                .attr("text-anchor", "middle")
-                .style("font-size", "16px")
-                .text("Rotten Tomatoes Score vs. Content Rating");
 
             function rating_to_int(d) {
                 switch (d) {
