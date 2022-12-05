@@ -9,8 +9,8 @@
   <body>
     <script type="module" src="script_rating.js"></script>
     <script type="module" src="table.js"></script>
-    <script src="script-critic-viewer.js"></script>
-    <script src="ratings-table.js"></script>
+    <script type="module" src="script-critic-viewer.js"></script>
+    <script type="module" src="ratings-table.js"></script>
     <script type="module" src="launch.js"></script>
 
 
@@ -24,12 +24,10 @@
       <div id = "RottenTomatoes">
         <div id="scatter">
           <svg id="scatterplot"></svg>
+          <svg id="bars" style="width:450px; height: 400px"></svg>
         </div>
         <div id="heatmaptext">
           <svg id="heatmap" style="width:400px; height: 400px"></svg>
-          <svg id="bars" style="width:450px; height: 400px"></svg>
-        </div>
-        <div id="ratingheatmaptext">
           <svg id="ratingheatmap" style="width:350px; height: 400px"></svg>
         </div>
       </div> 

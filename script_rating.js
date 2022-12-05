@@ -1,3 +1,5 @@
+import {dotToBars} from './script-critic-viewer.js'
+
 export function scatterplot() {
 
     d3.csv("rotten_tomatoes_movies.csv").then(
@@ -5,6 +7,7 @@ export function scatterplot() {
 
             //console.log(dataset)
 
+            var bad_rating = "NC17"
 
             for (let i = 0; i < dataset.length; i++) {
                 dataset[i].original_release_date = dataset[i].original_release_date.split('-')[0]
@@ -13,6 +16,8 @@ export function scatterplot() {
                 dataset[i].original_release_date = Math.floor(dataset[i].original_release_date / 10) * 10
             }
             var filtered_data = dataset.filter(function (d) { return d.original_release_date > 1999 })
+
+            filtered_data = filtered_data.filter(function (d){ return d.content_rating != bad_rating})
 
             if(localStorage.length > 0){
                 if(localStorage.getItem("genre") != null){
@@ -27,6 +32,11 @@ export function scatterplot() {
                 if(localStorage.getItem("decade") != null){
                     var decade_filter = JSON.parse(localStorage.getItem("decade"))
                     filtered_data = filtered_data.filter(function(d) { return d.original_release_date >= decade_filter['decade'] && d.original_release_date <= decade_filter['decade'] + 5})
+                }
+
+                if(localStorage.getItem("rating") != null){
+                    var rating_filter = JSON.parse(localStorage.getItem("rating"))
+                    filtered_data = filtered_data.filter(function(d) { return d.content_rating == rating_filter['rating']})
                 }
                 //filtered_data2 = filtered_data.filter(function(d) { return d.genres == genre_filter})
                 
@@ -49,7 +59,7 @@ export function scatterplot() {
 
 
             var dimensions = {
-                width: 2000,
+                width: 1000,
                 height: 700,
                 margin: {
                     top: 10,
@@ -76,7 +86,7 @@ export function scatterplot() {
 
             //d3.map(dataset, d=>d.content_rating)
             var xScale = d3.scaleBand()
-                .domain(dataset.map(xAccessor)) // label by Rating
+                .domain(filtered_data.map(xAccessor)) // label by Rating
                 .range([dimensions.margin.left, dimensions.width - dimensions.margin.right])
                 .padding([0.3])
             console.log(xScale.domain())
@@ -151,6 +161,19 @@ export function scatterplot() {
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y)
                     .attr("fill", d => d.color)
+                    .on('mouseover', function(d){
+                        d3.select(this).attr("stroke", "black")
+                        .attr("stroke-width", "2px")
+                        .style("cursor", "pointer")
+                    })
+                    .on('mouseout', function(d){
+                        d3.select(this)
+                          .attr("stroke-width", "0px")
+                    })
+                    /////////////////////////////////
+                    .on('click', function(d, i){
+                        dotToBars()
+                    })
                 n.transition().duration(500)
                     .attr("r", d => d.r)
                 return n

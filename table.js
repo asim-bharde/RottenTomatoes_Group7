@@ -36,7 +36,7 @@ d3.csv("rotten_tomatoes_movies.csv").then(
 
         for (var g of decades) {
             for (var v of movie_genres) {
-                b = {
+                var b = {
                     'decade': g,
                     'genre': v,
                     'score': 0,
@@ -148,12 +148,29 @@ d3.csv("rotten_tomatoes_movies.csv").then(
         }
         var click = function(event, d){
             console.log(d)
-            console.log(event)
+            //console.log(event)
+            var correct_genre = "";
+            if(d.genre == "Action"){
+                correct_genre = "Action & Adventure"
+            }
+            else if (d.genre == "Mystery"){
+                correct_genre = "Mystery & Suspense"
+            }
+            else if (d.genre == "Sci/Fi"){
+                correct_genre = "Science Fiction & Fantasy"
+            }
+            else if (d.genre == "Kids/Family"){
+                correct_genre = "Kids & Family"
+            }
+            else{
+                correct_genre = d.genre
+            }
+
             var decade = {
                 "decade": d.decade
             }
             var genre = {
-                "genre": d.genre
+                "genre": correct_genre
             }
             if(localStorage.getItem("decade") != null){
                 console.log("here")
@@ -162,6 +179,7 @@ d3.csv("rotten_tomatoes_movies.csv").then(
             if(localStorage.getItem("genre") != null){
                 localStorage.removeItem("genre")
             }
+
 
             localStorage.setItem("decade", JSON.stringify(decade))
             localStorage.setItem("genre", JSON.stringify(genre))
