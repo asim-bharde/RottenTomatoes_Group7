@@ -12,9 +12,13 @@
     <script type="module" src="script-critic-viewer.js"></script>
     <script type="module" src="ratings-table.js"></script>
     <script type="module" src="launch.js"></script>
+    
 
 
-    <h1>Rotten Tomatoes Review Prototype</h1>
+    <div>
+      <h1>Rotten Tomatoes Review</h1>
+    </div>
+    
     <!-- <select name="filters" id="filters">
       <option id="Content" value=1>Content</option>
       <option id="Critic-Viewer" value=2>Critic vs Viewer</option>
@@ -26,9 +30,13 @@
           <svg id="scatterplot"></svg>
           <svg id="bars" style="width:450px; height: 400px"></svg>
         </div>
-        <div id="heatmaptext">
-          <svg id="heatmap" style="width:400px; height: 400px"></svg>
-          <svg id="ratingheatmap" style="width:350px; height: 400px"></svg>
+        <div style="display: flex; flex-direction: row; justify-content: left;">
+          <div id="heatmaptext">
+            <svg id="heatmap" style="width:400px; height: 350px"></svg>
+          </div>
+          <div id="ratingheatmaptext">
+            <svg id="ratingheatmap" style="width:350px; height: 350px"></svg>
+          </div>
         </div>
       </div> 
     </main>

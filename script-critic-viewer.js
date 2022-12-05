@@ -83,7 +83,8 @@ export function dotToBars() {
                 .attr("transform", "translate(0," + dimensions.height + ")")
                 .call(d3.axisBottom(x).tickSize(0))
                 .selectAll("text")
-                .style("text-anchor", "end")
+                .style("text-anchor", "center")
+                .style("font", "18px times")
 
             // Add Y axis
             var y = d3.scaleLinear()

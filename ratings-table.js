@@ -75,12 +75,12 @@ d3.csv("rotten_tomatoes_movies.csv").then(
         var dimensions = {
             margin: {
                 top: 30,
-                bottom: 30,
+                bottom: 20,
                 right: 30,
                 left: 60
             },
             width: 300,
-            height: 350,
+            height: 275,
         }
         var svg = d3.select("#ratingheatmap")
             .append("svg")

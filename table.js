@@ -90,12 +90,12 @@ d3.csv("rotten_tomatoes_movies.csv").then(
         var dimensions = {
             margin: {
                 top: 30,
-                bottom: 30,
+                bottom: 20,
                 right: 30,
                 left: 60
             },
             width: 300,
-            height: 350,
+            height: 275,
         }
         var svg = d3.select("#heatmap")
             .append("svg")
@@ -179,6 +179,10 @@ d3.csv("rotten_tomatoes_movies.csv").then(
             if(localStorage.getItem("genre") != null){
                 localStorage.removeItem("genre")
             }
+
+            d3.select(this)
+                .attr("stroke", "black")
+                .attr("stroke-width", "2px")
 
 
             localStorage.setItem("decade", JSON.stringify(decade))
