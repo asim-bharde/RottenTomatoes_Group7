@@ -8,8 +8,6 @@
 //https://d3-graph-gallery.com/graph/heatmap_tooltip.html
 
 import {scatterplot} from './script_rating.js'
-import filters from './filters.json'  assert { type: 'json' };
-console.log(filters)
 //var filters = require('./filters.json')
 
 d3.csv("rotten_tomatoes_movies.csv").then(
