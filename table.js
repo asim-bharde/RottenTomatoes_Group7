@@ -7,6 +7,11 @@
 //
 //https://d3-graph-gallery.com/graph/heatmap_tooltip.html
 
+import {scatterplot} from './script_rating.js'
+import filters from './filters.json'  assert { type: 'json' };
+console.log(filters)
+//var filters = require('./filters.json')
+
 d3.csv("rotten_tomatoes_movies.csv").then(
     function (data) {
         
@@ -18,11 +23,11 @@ d3.csv("rotten_tomatoes_movies.csv").then(
         for (let i = 0; i < data.length; i++) {
             data[i].original_release_date = Math.floor(data[i].original_release_date / 5) * 5
         }
-        console.log(data)
+        //console.log(data)
 
         var filtered_data = data.filter(function (e) { return e.original_release_date > 1999 })
 
-        console.log(filtered_data)
+        //console.log(filtered_data)
 
         //var myGroups = ["2000", "1960s", "1970s", "1980s", "1990s", "2000s", "2010s"]
         var decades = [2000, 2005, 2010, 2015, 2020]
@@ -44,7 +49,7 @@ d3.csv("rotten_tomatoes_movies.csv").then(
         }
 
 
-        console.log(heatmap_data)
+        //console.log(heatmap_data)
 
         for (var i = 0; i < filtered_data.length; i++) {
             var genres = filtered_data[i].genres.split(',');
@@ -143,6 +148,27 @@ d3.csv("rotten_tomatoes_movies.csv").then(
                 .style("left", (d3.pointer(this)[0] + 70) + "px")
                 .style("top", (d3.pointer(this)[1]) + "px")
         }
+        var click = function(event, d){
+            console.log(d)
+            console.log(event)
+            var decade = {
+                "decade": d.decade
+            }
+            var genre = {
+                "genre": d.genre
+            }
+            if(localStorage.getItem("decade") != null){
+                console.log("here")
+                localStorage.removeItem("decade")
+            }
+            if(localStorage.getItem("genre") != null){
+                localStorage.removeItem("genre")
+            }
+
+            localStorage.setItem("decade", JSON.stringify(decade))
+            localStorage.setItem("genre", JSON.stringify(genre))
+            scatterplot(d.genre, d.decade)
+        }
         var mouseleave = function (d) {
             tooltip.style("opacity", 0)
         }
@@ -159,5 +185,6 @@ d3.csv("rotten_tomatoes_movies.csv").then(
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave)
+            .on("click", function(event, d){click(event, d)}) 
     }
 )
