@@ -41,6 +41,9 @@ From this dataset we came up with another series of possible questions:
 
 These questions were all interesting and seemed to hold our attention, but we knew there would be a good bit of calculation considering the 17 thousand data points in our dataset.
 
+<img src="images/tableau_mockup.jpg" width="400" height="400"/>
+<img src="images/sketch4.jpg" width="300" height="400"/>
+<img src="images/sketch5.jpg" width="300" height="400"/>
 
 ## 10/05/2022
 We spent a lot of time looking at our dataset and seeing where it fell short. There were certain columns where 15% of the data was not there. We had to take the time to decide whether or not to keep those data points or shrink our dataset.
@@ -73,6 +76,9 @@ We ran into another problem with this dataset that we didn’t initially expect:
 Some movies were missing a couple data points. 
  - This data was also not considered
 
+<img src="images/sketch1.jpg" width="500" height="250"/>
+<img src="images/sketch2.jpg" width="500" height="250"/>
+<img src="images/sketch3.jpg" width="500" height="250"/>
 
 
 ## 11/15/2022
@@ -92,6 +98,8 @@ The genre over time script was a different story from the popular genre question
 Creating a floating bar chart is harder than expected, since all the examples we have used so far have had data attached to the bottom of the x-axis. This made creating a chart to display the data challenging.
 
 In relation to the content rating visualization, there have been some issues pertaining to having multiple movies in a content rating with the same score, so we are trying to find solutions to the problem.  A possible solution could be to involve collision forces in the script to have the points on the scatter plot sit next to one another, and we will try to implement that for the time being.
+
+<img src="images/site_prototype.jpg" width="600" height="400"/>
 
 ## 11/22/2022
 
@@ -153,4 +161,6 @@ Other issues we faced were scaling issues for the different visualizations and p
 
 ## 12/1/2022
 As we approach the date in which we are presenting our visualization, we have grown confident in the changes we have implemented and additions we have made to our own visualization. Although the visualization may not be the most visually appealing, with flashy animations or popping colors and images, we feel that the visualization presents a user with an expansive way to answer many questions regarding the dataset, beyond the three questions we presented to begin our journey in creating the visualization. 
+
+<img src="images/site_image.jpg" width="600" height="400"/>
 
