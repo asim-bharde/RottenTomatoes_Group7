@@ -93,4 +93,64 @@ Creating a floating bar chart is harder than expected, since all the examples we
 
 In relation to the content rating visualization, there have been some issues pertaining to having multiple movies in a content rating with the same score, so we are trying to find solutions to the problem.  A possible solution could be to involve collision forces in the script to have the points on the scatter plot sit next to one another, and we will try to implement that for the time being.
 
+## 11/22/2022
+
+We decided to split our group into two sub groups to better accommodate our own schedules. Our group is now just Owen Petersen, and Asim Bharde. 
+
+After seeing the peer evaluations and other groups' examples in class, we realized that we had misunderstood the project objectives. Instead of creating three separate visualizations that all worked together, we had been trying to make one visualization that answered three different questions by itself.
+
+Once we identified this problem, we pivoted our design to make a more appealing visual system. We reexamined each of our questions and began trying different things we thought would work. 
+
+Our three questions:
+Does a certain genre of movies tend to score better than other genres and how has the quality  of those genres changed over time?
+Is there a correlation between the audience score and the critics score of a movie?
+Does content rating have an effect on the critic's score?
+
+One decision we had to make was how much or little to filter the data set. The initial dataset was about 17000 movies. Because we wanted to create a scatter plot which represented every single movie, we knew this was probably impractical or realistic to create a good visualization. We tried several different date cut offs, and finally settled on 2000 as the earliest day we would use. Then we added another filter for the most popular genres, so that there would always be a good amount of movies in each category, and that the visualization wouldn’t be too heavily influenced by any one individual movie or group of movies.
+This resulted in about 10000 movies for the final dataset that appear in our visualization. 
+
+For Q1 we tried using group barcharts to answer the question. Each genre was one bar, and we separated movies on the x-axis, while the score was on the y-axis. This allowed us to compare genres in one decade very easily, but compare across decades more difficult.
+
+We decided to move to a heatmap. On the x-axis we put the years(in groups of 5 years instead of decades) and on the y-axis we put the genres. The intensity of the color represented how many movies with that criteria had a “Fresh” or “certified-fresh” rating.
+
+For the benefit of the visualization and the interaction between the different graphs, we added a second heat map. This heat map has the years on the x-axis, but content rating on the y-axis, with the % of movies “fresh” or “certified-fresh” reflected in the color of the square. This heat map wasn’t intended to answer any specific question, but it gives different ways to filter the scatterplot, and also allows the user to see how ratings change over time with different content ratings. 
+
+
+Q2
+Grouped bar charts are the obvious and easy way to represent these, since you’re only really comparing 2 things in a static manner.
+We have a filtering problem again. It is very impractical to have that many bar charts on the screen at once.
+
+We decided to fix this problem by limiting it to 10 movies at a time, and adding a “refresh” button that would generate the graphs for 10 new random movies so you could compare. This helped the graph fit on the screen
+This doesn’t do a great job of answering the question, so we chose to change the visualization
+
+We tried several different things, like aggregating the data in different ways, but ultimately none of these created a compelling visual that interacted well with the others.
+
+To make the 3 graphs work well together, we went back to our original idea of using bar charts, but we only show one set of bars. On the initial load it is a random movie, but clicking on a dot on the scatter plot, the critic and audience score will be loaded to the bar chart.
+
+This allows the user to explore a little bit more - since the scatter plot uses critic score, they can click on highly rated movies and compare with the audience score, and see if there are any correlations between the two.
+While this still does not exactly answer the question in the best way possible, we believed the tradeoff to be worth it because it encourages more interaction with the visualization and exploration of the dataset.
+
+Q3
+
+Our final visualization is a scatter plot with each movie in the distribution being represented as a single dot on the graph. They are grouped on the x-axis by content rating, and critic score on the y-axis. These dots are separated by forces using D3. The dots are colored by their “primary” genre. 
+
+We decided to classify “primary” genre as the one first listed under the movie name when it appears in the dataset, since we found it to be difficult to introduce multiple genre labels to a specific movie dot. After all, the primary objective of this visualization is to identify trends based on content rating, so we decided it would be best to keep the complexity of the coloring scheme simple. 
+
+The scatterplot does seem to have a lot of datapoints on it, though, so it pushed us to decrease the time interval in movie release date to allow us to present a more coherent visualization that wouldn’t hurt the users eyes or RAM. 
+
+## 11/29/2022
+Now that we have a more detailed blueprint on the purpose and idea of the visualization, the flow of work has been moving quite smoothly. The only speedbump we have encountered at this point is some details on the specific interactions we wanted to implement into the visualization.
+
+We felt that a good implementation of the heatmaps, in addition to the trends they show themselves, would be the ability to filter down movie data on the scatterplot visualization to see the heat map trends on a more individual level so one can see the specific movies being described on each panel of the heatmap.
+
+We were having trouble on how to allow the transformations to take place, though, since transforming points on the scatterplot according to the heatmap selection became tricky. We decided to create a local server that would save the selection of the user, whether a panel on the heatmap was selected or not, and would transform the points on the scatterplot according to that. After implementing the local server, we found that there were many benefits to this, one main one being the ability to filter down the dataset a little bit more so the mass of data is not as overwhelming to the user as it could be without such filtering.
+
+We also felt that at this point, it would be a good idea to fine tune the interaction and feel of the site itself.
+
+We were having trouble with using interactions multiple times over the course of using the visualization and were also having some difficulty making some of the transitions and transformations stick. We were able to overcome this adversity by using a JSON local server to store selections made by the user and complete transitions using the stored data. This provided us a way to make the transitions necessary for the different interactions work smoothly and more efficiently. 
+
+Other issues we faced were scaling issues for the different visualizations and placement on the screen, but we were able to work together to test different implementations of the site to allow for the best viewing and interactive experience for the user. 
+
+## 12/1/2022
+As we approach the date in which we are presenting our visualization, we have grown confident in the changes we have implemented and additions we have made to our own visualization. Although the visualization may not be the most visually appealing, with flashy animations or popping colors and images, we feel that the visualization presents a user with an expansive way to answer many questions regarding the dataset, beyond the three questions we presented to begin our journey in creating the visualization. 
 
